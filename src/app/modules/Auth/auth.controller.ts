@@ -28,7 +28,7 @@ const logout = catchAsync(async (req: Request, res: Response) => {
   SendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'User logged in successfully',
+    message: 'User logged out successfully',
     data: result,
   });
 });

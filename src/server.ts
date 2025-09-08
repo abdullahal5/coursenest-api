@@ -3,6 +3,7 @@ import { Server } from 'http';
 import mongoose from 'mongoose';
 import app from './app';
 import config from './config';
+import { seedAdmin } from './seed';
 let server: Server;
 
 async function main() {
@@ -16,7 +17,7 @@ async function main() {
       console.log(`🚀 Server is running on port ${config.port}`);
     });
 
-    // seedSuperAdmin();
+    seedAdmin();
   } catch (err) {
     console.error(
       `❌ Failed to start the application: ${err instanceof Error ? err.message : err}`,
