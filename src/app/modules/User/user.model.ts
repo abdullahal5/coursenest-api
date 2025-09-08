@@ -1,8 +1,9 @@
 import mongoose, { Schema } from 'mongoose';
-import { IUser } from './user.interface';
+import { IUser, UserModel } from './user.interface';
 import bcrypt from 'bcrypt';
+import config from '../../../config';
 
-const userSchema = new Schema<IUser>(
+const userSchema = new Schema<IUser, UserModel>(
   {
     name: { type: String, required: true, trim: true, minlength: 3, maxlength: 50 },
     email: {
@@ -19,18 +20,18 @@ const userSchema = new Schema<IUser>(
   { timestamps: true, versionKey: false },
 );
 
-// Hash password before saving
+// Hash password before user save
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
-  const salt = await bcrypt.genSalt(10);
+  const salt = await bcrypt.genSalt(Number(config.bcrypt_salt_rounds));
   this.password = await bcrypt.hash(this.password, salt);
   next();
 });
 
-// Compare password method
-userSchema.methods.comparePassword = async function (candidatePassword: string) {
-  return await bcrypt.compare(candidatePassword, this.password);
+// Check Password is Checked
+userSchema.statics.isPasswordMatched = async function (plainTextPassword, hashedPassword) {
+  return await bcrypt.compare(plainTextPassword, hashedPassword);
 };
 
-const User = mongoose.model<IUser>('User', userSchema);
+const User = mongoose.model<IUser, UserModel>('User', userSchema);
 export default User;
