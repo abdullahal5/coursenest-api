@@ -4,6 +4,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import { notfound } from './app/middlewares';
+import router from './app/routes';
 
 const app: Application = express();
 
@@ -19,6 +20,9 @@ app.get('/', (req: Request, res: Response) => {
     Message: 'COURSE MANAGEMENT API IS RUNNING...',
   });
 });
+
+// router
+app.use('/api', router);
 
 // Error Handling
 app.use(notfound);
