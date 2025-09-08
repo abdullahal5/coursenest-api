@@ -120,7 +120,7 @@ Logs out the user and invalidates the refresh token.
 
 **Request Header:**
 
-```json
+```http
 Authorization: Bearer accessToken
 ```
 
@@ -129,7 +129,7 @@ Authorization: Bearer accessToken
 ```json
 {
   "success": true,
-  "message": "User logged in successfully",
+  "message": "User logged out successfully",
   "data": null
 }
 ```
@@ -147,7 +147,7 @@ Fetch all available courses.
 
 **Request Header:**
 
-```json
+```http
 Authorization: Bearer accessToken
 ```
 
@@ -177,7 +177,7 @@ Fetch a single course by its ID.
 
 **Request Header:**
 
-```json
+```http
 Authorization: Bearer accessToken
 ```
 
@@ -205,7 +205,7 @@ Create a new course.
 
 **Request Header:**
 
-```json
+```http
 Authorization: Bearer accessToken
 ```
 
@@ -244,7 +244,7 @@ Update a course by ID.
 
 **Request Header:**
 
-```json
+```http
 Authorization: Bearer accessToken
 ```
 
@@ -281,7 +281,7 @@ Delete a course by ID.
 
 **Request Header:**
 
-```json
+```http
 Authorization: Bearer accessToken
 ```
 
