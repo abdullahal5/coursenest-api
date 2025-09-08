@@ -2,7 +2,8 @@
 import express, { Application, NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import status from 'http-status';
+import globalErrorHandler from './app/middlewares/globalErrorHandler';
+import { notfound } from './app/middlewares';
 
 const app: Application = express();
 
@@ -19,16 +20,8 @@ app.get('/', (req: Request, res: Response) => {
   });
 });
 
-// not found route
-app.use((req: Request, res: Response, next: NextFunction) => {
-  res.status(status.NOT_FOUND).json({
-    success: false,
-    message: 'API NOT FOUND!',
-    error: {
-      path: req.originalUrl,
-      message: 'Your requested path is not found!',
-    },
-  });
-});
+// Error Handling
+app.use(notfound);
+app.use(globalErrorHandler);
 
 export default app;
