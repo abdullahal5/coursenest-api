@@ -17,13 +17,6 @@ export default {
     jwt_refresh_expires_in: process.env.JWT_REFRESH_EXPIRES_IN,
   },
 
-  smtp: {
-    smtp_host: process.env.SMTP_HOST,
-    smtp_port: process.env.SMTP_PORT,
-    smtp_auth_email: process.env.SMTP_AUTH_EMAIL,
-    smtp_auth_password: process.env.SMTP_AUTH_PASSWORD,
-  },
-
   // Define the default super admin user
   admin_credential: {
     admin_email: process.env.ADMIN_EMAIL,

@@ -68,11 +68,6 @@ JWT_ACCESS_EXPIRES_IN=10d
 JWT_REFRESH_SECRET = 41b991b21dc0a439cb45fed544992ba3fafa3f912d3c4dedebec3592d7d552fb74a86a4d69ea560bcf7bf988d173ddecaffa9815dd5a6661bcacd58c0cdb2dc5
 JWT_REFRESH_EXPIRES_IN=365d
 
-SMTP_HOST="smtp.gmail.com"
-SMTP_PORT=587
-SMTP_AUTH_EMAIL="abdullahalfahin183@gmail.com"
-SMTP_AUTH_PASSWORD="njvx iwhw wdnm mxqo"
-
 # super admin credentials
 ADMIN_EMAIL="admin@admin.com"
 ADMIN_PASSWORD="Admin_1234"
@@ -85,7 +80,8 @@ CLIENT_URL="http://localhost:5173"
 
 ## 📚 API Endpoints
 
-**Base URL:** `http://localhost:5000/api/v1`
+**Base URL (Local):** `http://localhost:5000/api`  
+**Base URL (Live):** `https://coursenest-api.vercel.app/api`
 
 > ⚠️ **Note:** After logging in, you will receive an `accessToken` in the response.  
 > Use this token in the `Authorization` header (`Bearer <accessToken>`) for all protected routes.
