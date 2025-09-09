@@ -33,7 +33,20 @@ const logout = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const generateRefreshToken = catchAsync(async (req, res) => {
+  const { refreshToken } = req.cookies;
+  const result = await AuthServices.generateRefreshTokenFromDB(refreshToken);
+
+  SendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Access token is retrieved successfully!',
+    data: result,
+  });
+});
+
 export const AuthController = {
   loginUser,
   logout,
+  generateRefreshToken,
 };

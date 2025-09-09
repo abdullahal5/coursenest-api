@@ -10,4 +10,9 @@ router.post('/login', validateRequest(loginUserSchema), AuthController.loginUser
 
 router.post('/logout', auth(USER_ROLE.admin, USER_ROLE.user), AuthController.logout);
 
+router.post(
+  '/refresh-token',
+  AuthController.generateRefreshToken,
+);
+
 export const authRoutes = router;

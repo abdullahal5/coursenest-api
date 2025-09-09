@@ -146,6 +146,28 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/refresh-token",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -225,13 +247,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{BASE_URL}}/course/68bef296f49d087f4d6c733a",
+							"raw": "{{BASE_URL}}/course/68bef321f49d087f4d6c7342",
 							"host": [
 								"{{BASE_URL}}"
 							],
 							"path": [
 								"course",
-								"68bef296f49d087f4d6c733a"
+								"68bef321f49d087f4d6c7342"
 							]
 						}
 					},
@@ -250,7 +272,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"title\": \"UI/UX Design Fundamentals\",\r\n  \"description\": \"Learn the principles of UI/UX design, prototyping, and creating user-friendly interfaces.\"\r\n}\r\n",
+							"raw": "{\r\n    \"title\": \"Advanced CSS & Tailwind\",\r\n    \"description\": \"Master CSS and Tailwind to build responsive and modern web layouts from scratch.\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -258,13 +280,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/course/68bef296f49d087f4d6c733a",
+							"raw": "{{BASE_URL}}/course/68bef321f49d087f4d6c7342",
 							"host": [
 								"{{BASE_URL}}"
 							],
 							"path": [
 								"course",
-								"68bef296f49d087f4d6c733a"
+								"68bef321f49d087f4d6c7342"
 							]
 						}
 					},
@@ -321,7 +343,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"courseId\": \"68bef2caf49d087f4d6c733c\"\r\n}",
+							"raw": "{\r\n    \"courseId\": \"68bef321f49d087f4d6c7342\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

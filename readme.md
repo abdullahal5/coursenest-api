@@ -205,6 +205,23 @@ Authorization: Bearer accessToken
 }
 ```
 
+#### 3. Refresh token
+
+`POST /auth/refresh-token`  
+Refresh token call for get new access token
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "message": "Access token is retrieved successfully!",
+  "data": {
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  }
+}
+```
+
 ### **Course Routes**
 
 _Admin-only routes require Authorization header with an admin access token._

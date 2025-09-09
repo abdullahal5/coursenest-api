@@ -54,7 +54,29 @@ const logoutFromDB = async (user: JwtPayload) => {
   return null;
 };
 
+const generateRefreshTokenFromDB = async (token: string) => {
+  const user = await User.findOne({ refreshToken: token });
+  if (!user) {
+    throw new AppError(httpStatus.UNAUTHORIZED, 'Invalid refresh token');
+  }
+
+  const jwtPayload = {
+    email: user.email,
+    role: user.role,
+  };
+
+  const accessToken = jwtHelpers.generateToken(
+    jwtPayload,
+    config.jwt.jwt_access_secret as string,
+    config.jwt.jwt_access_expires_in as string,
+  );
+
+  return { accessToken };
+};
+
+
 export const AuthServices = {
   loginUser,
   logoutFromDB,
+  generateRefreshTokenFromDB,
 };
