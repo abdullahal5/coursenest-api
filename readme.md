@@ -84,7 +84,74 @@ CLIENT_URL="http://localhost:5173"
 
 ---
 
+### **User Routes**
+
+---
+
+#### 1. Create User or Register
+
+`POST /user/create-user`  
+User saves in Database.
+
+**Request Body:**
+
+```json
+{
+  "name": "John Doe",
+  "email": "johndoe@gmail.com",
+  "password": "12345678",
+  "role": "user" // optional: can be "admin" or "user" (default is "user")
+}
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "message": "User registered successfully",
+  "data": {
+    "name": "John Doe",
+    "email": "johndoe@gmail.com",
+    "role": "user",
+    "_id": "68bfd8eface66098b43b2359",
+    "createdAt": "2025-09-09T07:36:15.627Z",
+    "updatedAt": "2025-09-09T07:36:15.627Z"
+  }
+}
+```
+
+#### 2. Get my profile
+
+`GET /user/me`  
+Get my profile
+
+**Request Header:**
+
+```http
+Authorization: Bearer accessToken
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "message": "User profile fetched successfully",
+  "data": {
+    "_id": "68bedd1a6b4c0ecf9f1557ff",
+    "name": "John Doe",
+    "email": "johndoe@gmail.com",
+    "role": "user",
+    "createdAt": "2025-09-08T13:41:46.437Z",
+    "updatedAt": "2025-09-08T13:55:42.821Z"
+  }
+}
+```
+
 ### **Auth Routes**
+
+---
 
 #### 1. Login User
 
@@ -142,7 +209,7 @@ _Admin-only routes require Authorization header with an admin access token._
 
 #### 1. Get All Courses
 
-`GET /course/`  
+`GET /course`  
 Fetch all available courses.
 
 **Request Header:**
@@ -292,5 +359,108 @@ Authorization: Bearer accessToken
   "success": true,
   "message": "Course deleted successfully",
   "data": null
+}
+```
+
+### **Purchase Routes**
+
+_Admin-only routes require Authorization header with an admin access token._
+
+---
+
+#### 1. Purchase Course (User Only)
+
+`POST /course`
+Purchase a course.
+
+**Request Header:**
+
+```http
+Authorization: Bearer accessToken
+```
+
+**Request Body**:
+
+```json
+{
+  "courseId": "68bef2caf49d087f4d6c733c"
+}
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "message": "Course purchased successfully",
+  "data": {
+    "userId": "68bedd1a6b4c0ecf9f1557ff",
+    "courseId": "68bef2d2f49d087f4d6c733e",
+    "amount": 59.99,
+    "_id": "68bfd717ace66098b43b2353",
+    "date": "2025-09-09T07:28:23.743Z",
+    "createdAt": "2025-09-09T07:28:23.743Z",
+    "updatedAt": "2025-09-09T07:28:23.743Z",
+    "__v": 0
+  }
+}
+```
+
+#### 2. Get my purchased courses (User Only)
+
+**Request Header:**
+
+```http
+Authorization: Bearer accessToken
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "message": "Purchased courses retrieved successfully",
+  "data": [
+    {
+      "_id": "68bfd5d3ace66098b43b234a",
+      "userId": "68bedd1a6b4c0ecf9f1557ff",
+      "courseId": {
+        "_id": "68bef2caf49d087f4d6c733c",
+        "title": "React for Beginners",
+        "description": "A complete guide to building web applications using React, hooks, and context API.",
+        "price": 39.99,
+        "instructor": "Jane Smith",
+        "createdAt": "2025-09-08T15:14:18.232Z",
+        "updatedAt": "2025-09-09T07:23:00.241Z",
+        "__v": 0,
+        "purchaseCount": 1
+      },
+      "amount": 39.99,
+      "date": "2025-09-09T07:22:59.927Z",
+      "createdAt": "2025-09-09T07:22:59.931Z",
+      "updatedAt": "2025-09-09T07:22:59.931Z",
+      "__v": 0
+    },
+    {
+      "_id": "68bfd717ace66098b43b2353",
+      "userId": "68bedd1a6b4c0ecf9f1557ff",
+      "courseId": {
+        "_id": "68bef2d2f49d087f4d6c733e",
+        "title": "Python Data Science",
+        "description": "Learn Python for data analysis, visualization, and machine learning with hands-on projects.",
+        "price": 59.99,
+        "instructor": "Alice Johnson",
+        "createdAt": "2025-09-08T15:14:26.800Z",
+        "updatedAt": "2025-09-09T07:28:24.044Z",
+        "__v": 0,
+        "purchaseCount": 1
+      },
+      "amount": 59.99,
+      "date": "2025-09-09T07:28:23.743Z",
+      "createdAt": "2025-09-09T07:28:23.743Z",
+      "updatedAt": "2025-09-09T07:28:23.743Z",
+      "__v": 0
+    }
+  ]
 }
 ```
