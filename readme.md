@@ -8,7 +8,7 @@ The Course Management API is a backend application built with Node.js, Express.j
 
 Below is the full database design of the system, including tables for users, transactions, budgets, AI insights, and workflow events:
 
-![App Screenshot](public/image.png)
+<img src="public/image.png" alt="App Screenshot" style="width: 100%; height: auto;" />
 
 ---
 
