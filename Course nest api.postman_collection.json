@@ -1,0 +1,413 @@
+{
+	"info": {
+		"_postman_id": "1582c8c7-02ae-4033-bf47-d2c150385dcd",
+		"name": "Course nest api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31708605"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"John Doe\",\r\n    \"email\": \"johndoe@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/user/create-user",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"user",
+								"create-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get my profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{User_Token}}",
+								"description": "user token",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/user/me",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"user",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"if (response.success && response.data?.accessToken) {\r",
+									"    if (response.data.role === \"user\") {\r",
+									"        pm.collectionVariables.set(\"User_Token\", `Bearer ${response.data.accessToken}`);\r",
+									"    } else {\r",
+									"        pm.collectionVariables.set(\"Admin_Token\", `Bearer ${response.data.accessToken}`);\r",
+									"    }\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// user credentials\r\n{\r\n    \"email\": \"johndoe@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}\r\n// admin credentials\r\n// {\r\n//     \"email\": \"admin@admin.com\",\r\n//     \"password\": \"Admin_1234\"\r\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/login",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Log out",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{User_Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/logout",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Course",
+			"item": [
+				{
+					"name": "Create course",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Admin_Token}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{User_Token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"UI/UX Design Fundamentals\",\r\n    \"description\": \"Learn the principles of UI/UX design, prototyping, and creating user-friendly interfaces.\",\r\n    \"price\": 34.99,\r\n    \"instructor\": \"Sophia Martinez\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/course",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"course"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Course",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{User_Token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/course",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"course"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Course",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{User_Token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/course/68bef296f49d087f4d6c733a",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"course",
+								"68bef296f49d087f4d6c733a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Admin_Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"UI/UX Design Fundamentals\",\r\n  \"description\": \"Learn the principles of UI/UX design, prototyping, and creating user-friendly interfaces.\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/course/68bef296f49d087f4d6c733a",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"course",
+								"68bef296f49d087f4d6c733a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Admin_Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/course/68bef296f49d087f4d6c733a",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"course",
+								"68bef296f49d087f4d6c733a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Purchase",
+			"item": [
+				{
+					"name": "Purchase a course",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{User_Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"courseId\": \"68bef2caf49d087f4d6c733c\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/purchase",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"purchase"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get my purchased courses",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{User_Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/purchase/my",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"purchase",
+								"my"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:5000/api"
+		},
+		{
+			"key": "Admin_Token",
+			"value": ""
+		},
+		{
+			"key": "User_Token",
+			"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YmU5YTg0ZGY0Y2NjZTljOWJkOWViOSIsImVtYWlsIjoiam9obmRvZUBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE3NTczMzg0MDIsImV4cCI6MTc1ODIwMjQwMn0.b0v0cbqzn28MaL7riEFPmXQgsFJoDd0nY-B4wGM2JeQ"
+		}
+	]
+}
